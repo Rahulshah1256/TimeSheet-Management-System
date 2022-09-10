@@ -1,0 +1,59 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span class="title-center">{{dialogData.action}} Task</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="taskForm">
+        <div fxFlex fxLayout="column">
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" required>
+                    <mat-error *ngIf="taskForm.controls.name.touched && taskForm.controls.name.invalid">
+                        <span *ngIf="taskForm.controls.name.errors.required">This field is mandatory</span>
+                    <span *ngIf="taskForm.controls.name.errors.pattern">This field is invalid</span>
+                    </mat-error> 
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Project</mat-label>
+                    <mat-select formControlName="projectId">
+                        <mat-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Start Time</mat-label>
+                    <input matInput formControlName="startTime" type="datetime-local" required>
+                    <mat-error *ngIf="taskForm.controls.startTime.touched && taskForm.controls.startTime.invalid">
+                        <span *ngIf="taskForm.controls.startTime.errors.required">This field is mandatory</span>
+                    <span *ngIf="taskForm.controls.startTime.errors.pattern">This field is invalid</span>
+                    </mat-error> 
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>End Time</mat-label>
+                    <input matInput formControlName="endTime" type="datetime-local" required>
+                    <mat-error *ngIf="taskForm.controls.endTime.touched && taskForm.controls.endTime.invalid">
+                        <span *ngIf="taskForm.controls.endTime.errors.required">This field is mandatory</span>
+                    <span *ngIf="taskForm.controls.endTime.errors.pattern">This field is invalid</span>
+                    </mat-error> 
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
+    [disabled]="!(taskForm.valid && taskForm.dirty)">{{action}}</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>

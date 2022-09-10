@@ -1,0 +1,81 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span class="title-center">{{dialogData.action}}</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="timeEntriesForm">
+        <div fxFlex fxLayout="column">
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" required>
+                    <mat-error *ngIf="timeEntriesForm.controls.name.touched && timeEntriesForm.controls.name.invalid">
+                        <span *ngIf="timeEntriesForm.controls.name.errors.required">This field is mandatory</span>
+                    <span *ngIf="timeEntriesForm.controls.name.errors.pattern">This field is invalid</span>
+                    </mat-error> 
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Project</mat-label>
+                    <mat-select formControlName="projectId">
+                        <mat-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Comment</mat-label>
+                    <input matInput formControlName="comment" required>
+                    <mat-error *ngIf="timeEntriesForm.controls.comment.touched && timeEntriesForm.controls.comment.invalid">
+                        <span *ngIf="timeEntriesForm.controls.comment.errors.required">This field is mandatory</span>
+                    <span *ngIf="timeEntriesForm.controls.name.comment.pattern">This field is invalid</span>
+                    </mat-error> 
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Date</mat-label>
+                    <input matInput formControlName="date" type="date" required>
+                    <mat-error *ngIf="timeEntriesForm.controls.date.touched && timeEntriesForm.controls.date.invalid">
+                        <span *ngIf="timeEntriesForm.controls.date.errors.required">This field is mandatory</span>
+                    <span *ngIf="timeEntriesForm.controls.date.errors.pattern">This field is invalid</span>
+                    </mat-error> 
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Start Time</mat-label>
+                    <input matInput formControlName="StartTime" type="datetime-local" required>
+                    <mat-error *ngIf="timeEntriesForm.controls.StartTime.touched && timeEntriesForm.controls.StartTime.invalid">
+                        <span *ngIf="timeEntriesForm.controls.StartTime.errors.required">This field is mandatory</span>
+                    <span *ngIf="timeEntriesForm.controls.StartTime.errors.pattern">This field is invalid</span>
+                    </mat-error> 
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>End Time</mat-label>
+                    <input matInput formControlName="EndTime" type="datetime-local" required>
+                    <mat-error *ngIf="timeEntriesForm.controls.EndTime.touched && timeEntriesForm.controls.EndTime.invalid">
+                        <span *ngIf="timeEntriesForm.controls.EndTime.errors.required">This field is mandatory</span>
+                    <span *ngIf="timeEntriesForm.controls.EndTime.errors.pattern">This field is invalid</span>
+                    </mat-error> 
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
+    [disabled]="!(timeEntriesForm.valid && timeEntriesForm.dirty)">{{action}}</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>

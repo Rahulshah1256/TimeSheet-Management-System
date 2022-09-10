@@ -1,0 +1,28 @@
+<body>
+    <mat-card>
+        <b><span>Dashboard</span></b>
+    </mat-card>
+    <br>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <div class="container">
+                    <h2 class="title">Total Project</h2>
+                    <h1 class="title">{{data?.project}}</h1>
+                    <p><button class="button" [routerLink]="['/timesheet/project']">View Project</button></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <div class="container">
+                    <h2 class="title">Total Time Entry</h2>
+                    <h1 class="title">{{data?.product}}</h1>
+                    <p><button class="button" [routerLink]="['/timesheet/timeEntries']">View Time Entry</button></p>
+                </div>
+            </div>
+        </div> 
+
+    </div>
+</body>
