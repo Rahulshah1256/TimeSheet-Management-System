@@ -9,7 +9,7 @@ const auth = require("../middleware/authentication");
 const checkRole = require("../middleware/checkRole");
 const passwordEncrypt = require("../middleware/passwordEncrypt");
 
-router.post("/signup",  (req, res) => {
+router.post("/signup", passwordEncrypt.encryptPassWord, (req, res) => {
   let employee = req.body;
   query = "select email, password, role, status from employee where email=?";
   connection.query(query, [employee.email], (err, results) => {

@@ -72,7 +72,7 @@ export class TaskComponent implements OnInit {
     var data = {
       name: formData.name,
       projectId: formData.projectId,
-      startTime: formData.StartTime,
+      startTime: formData.startTime,
       endTime:formData.endTime
     }
     this.taskService.add(data).subscribe((response:any) =>{

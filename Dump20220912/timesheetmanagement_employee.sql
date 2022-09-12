@@ -16,33 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `timeentries`
+-- Table structure for table `employee`
 --
 
-DROP TABLE IF EXISTS `timeentries`;
+DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `timeentries` (
+CREATE TABLE `employee` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `projectId` int NOT NULL,
-  `comment` varchar(255) DEFAULT NULL,
-  `date` date NOT NULL,
-  `StartTime` timestamp NOT NULL,
-  `EndTime` timestamp NOT NULL,
-  `status` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `name` varchar(250) DEFAULT NULL,
+  `contactNumber` varchar(20) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `status` varchar(250) DEFAULT NULL,
+  `role` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `timeentries`
+-- Dumping data for table `employee`
 --
 
-LOCK TABLES `timeentries` WRITE;
-/*!40000 ALTER TABLE `timeentries` DISABLE KEYS */;
-INSERT INTO `timeentries` VALUES (2,'sanjay',2,'beautiful project','2022-05-12','2022-02-09 01:30:00','2022-03-09 03:30:00','true'),(4,'rahul',3,'worked on backend','2022-09-07','2022-09-07 18:30:00','2022-09-19 18:30:00','true'),(5,'john',4,'Fornt page','2022-09-08','2022-09-09 10:40:00','2022-09-15 10:40:00','true'),(7,'praveen',1,'admin login','2022-09-10','2022-09-10 06:03:00','2022-09-15 06:03:00','true'),(8,'rakul',4,'shopping','2022-09-14','2022-09-23 06:19:00','2022-09-29 06:19:00','true');
-/*!40000 ALTER TABLE `timeentries` ENABLE KEYS */;
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (1,'Admin','9089765476','admin@gmail.com','admin','true','admin'),(2,'ranvir','8978098756','ranvir@gmail.com','ranvir123','true','user'),(3,'vinay','6532658742','vinay@gmail.com','vinay@123','true','user'),(4,'punam','5632654785','punam@gmail.com','punam123','true','user'),(5,'asif','4532568452','asif@gmail.com','asif123','true','user'),(6,'bobby','4521257856','bobby@gmail.com','bobby123','true','user'),(7,'ravi','8978098756','ranvi@gmail.com','ranvi123','false','user'),(8,'ravi','8978098756','sohan@gmail.com','ranvi123','false','user'),(9,'kumar','8978098756','kumar@gmail.com',NULL,'false','user'),(10,'karan','4578098756','karan@gmail.com','ranvi123','false','user'),(11,'Navin','7865098756','navin@gmail.com','navin123','false','user');
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-10 11:32:38
+-- Dump completed on 2022-09-12 15:43:29

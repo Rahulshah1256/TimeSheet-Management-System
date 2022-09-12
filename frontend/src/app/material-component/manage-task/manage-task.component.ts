@@ -47,12 +47,12 @@ export class ManageTaskComponent implements OnInit {
   }
 
   handleAddAction(){
-    const dialolConfig = new MatDialogConfig();
-    dialolConfig.data = {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
       action: 'Add'
     }
-    dialolConfig.width = "850px";
-    const dialogRef = this.dialog.open(TaskComponent, dialolConfig);
+    dialogConfig.width = "850px";
+    const dialogRef = this.dialog.open(TaskComponent, dialogConfig);
     this.router.events.subscribe(() =>{
       dialogRef.close();
     })
@@ -64,13 +64,13 @@ export class ManageTaskComponent implements OnInit {
   }
 
   handleEditAction(values:any){
-    const dialolConfig = new MatDialogConfig();
-    dialolConfig.data = {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
       action: 'Edit',
       data:values
     }
-    dialolConfig.width = "850px";
-    const dialogRef = this.dialog.open(TaskComponent, dialolConfig);
+    dialogConfig.width = "850px";
+    const dialogRef = this.dialog.open(TaskComponent, dialogConfig);
     this.router.events.subscribe(() =>{
       dialogRef.close();
     })
@@ -83,11 +83,11 @@ export class ManageTaskComponent implements OnInit {
   }
  
   handleDeleteAction(values:any){
-    const dialolConfig = new MatDialogConfig();
-    dialolConfig.data ={
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data ={
       message: 'delete '+values.name+' task'
     };
-    const dialogRef = this.dialog.open(ConfirmationComponent, dialolConfig);
+    const dialogRef = this.dialog.open(ConfirmationComponent, dialogConfig);
     const sub = dialogRef.componentInstance.onEmitStatusChange.subscribe((response:any) =>{
       this.deleteTask(values.id);
       dialogRef.close();

@@ -7,10 +7,10 @@ var checkRole = require("../middleware/checkRole");
 router.post("/add", auth.authenticateToken, checkRole.checkRole, (req, res) => {
   let timeEntries = req.body;
   var query =
-    "insert into timeEntries (name, projectId, comment, date, StartTime, EndTime, status) values(?, ?, ?, ?, ?, ?, 'true')";
+    "insert into timeEntries (name, projectId, taskId, date, StartTime, EndTime, status) values(?, ?, ?, ?, ?, ?, 'true')";
   connection.query(
     query,
-    [timeEntries.name, timeEntries.projectId, timeEntries.comment, timeEntries.date, timeEntries.StartTime, timeEntries.EndTime],
+    [timeEntries.name, timeEntries.projectId, timeEntries.taskId, timeEntries.date, timeEntries.StartTime, timeEntries.EndTime],
     (err, results) => {
       if (!err) {
         return res.status(200).json({ message: "Time Entry Added Successfully" });
@@ -23,7 +23,7 @@ router.post("/add", auth.authenticateToken, checkRole.checkRole, (req, res) => {
 
 router.get("/get", auth.authenticateToken, (req, res) => {
   var query =
-    "select t.id, t.name,  t.comment, t.date, t.StartTime, t.EndTime, t.status, p.id as projectId, p.name as projectName from timeEntries as t INNER JOIN project as p where t.projectId = p.id";
+    "select t.id, t.name, t.date, t.StartTime, t.EndTime, t.status, p.id as projectId, p.name as projectName, tk.id as taskId, tk.name as taskName from timeEntries as t INNER JOIN project as p ON t.projectId = p.id  JOIN task as tk ON t.taskId = tk.id ";
   connection.query(query, (err, results) => {
     if (!err) {
       return res.status(200).json(results);
@@ -48,7 +48,7 @@ router.get("/getByProject/:id", auth.authenticateToken, (req, res, next) => {
 
 router.get("/getById/:id", auth.authenticateToken, (req, res, next) => {
   const id = req.params.id;
-  var query = "select id, name, comment, date, StartTime, EndTime from timeEntries  where id=?";
+  var query = "select id, name, date, StartTime, EndTime from timeEntries  where id=?";
   connection.query(query, [id], (err, results) => {
     if (!err) {
       return res.status(200).json(results);
@@ -65,13 +65,13 @@ router.patch(
   (req, res, next) => {
     let timeEntries = req.body;
     var query =
-      "update timeEntries set name=?, projectId=?, comment=?, date=?, StartTime=?, EndTime=? where id=?";
+      "update timeEntries set name=?, projectId=?, taskId=?, date=?, StartTime=?, EndTime=? where id=?";
     connection.query(
       query,
       [
         timeEntries.name,
         timeEntries.projectId,
-        timeEntries.comment,
+        timeEntries.taskId,
         timeEntries.date,
         timeEntries.StartTime,
         timeEntries.EndTime,

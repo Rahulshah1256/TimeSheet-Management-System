@@ -18,8 +18,18 @@
             <div class="card">
                 <div class="container">
                     <h2 class="title">Total Time Entry</h2>
-                    <h1 class="title">{{data?.product}}</h1>
+                    <h1 class="title">{{data?.timeEntries}}</h1>
                     <p><button class="button" [routerLink]="['/timesheet/timeEntries']">View Time Entry</button></p>
+                </div>
+            </div>
+        </div> 
+
+        <div class="column">
+            <div class="card">
+                <div class="container">
+                    <h2 class="title">Total Task</h2>
+                    <h1 class="title">{{data?.task}}</h1>
+                    <p><button class="button" [routerLink]="['/timesheet/task']">View Task</button></p>
                 </div>
             </div>
         </div> 

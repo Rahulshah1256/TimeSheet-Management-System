@@ -6,6 +6,7 @@ var auth = require("../middleware/authentication");
 router.get("/details", auth.authenticateToken, (req, res, next) => {
   var projectCount;
   var timeSheetCount;
+  var taskCount;
   var query = "Select count(id) as projectCount from project";
   connection.query(query, (err, results) => {
     if (!err) {
@@ -19,6 +20,21 @@ router.get("/details", auth.authenticateToken, (req, res, next) => {
   connection.query(query, (err, results) => {
     if (!err) {
       timeSheetCount = results[0].timeSheetCount;
+    } else {
+      return res.status(500).json(err);
+    }
+  });
+
+  var query = "select count(id) as taskCount from task";
+  connection.query(query, (err, results) => {
+    if (!err) {
+      taskCount = results[0].taskCount;
+      var data = {
+        project: projectCount,
+        timeEntries: timeSheetCount,
+        task: taskCount
+      };
+    return res.status(200).json(data);
     } else {
       return res.status(500).json(err);
     }

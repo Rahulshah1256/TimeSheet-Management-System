@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProjectService } from 'src/app/services/project.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { TaskService } from 'src/app/services/task.service';
 import { TimeEntriesService } from 'src/app/services/time-entries.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
 
@@ -19,19 +20,21 @@ export class TimeEntriesComponent implements OnInit {
   action:any = "Add";
   responseMessage: any;
   projects:any = [];
+  tasks:any = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData:any,
   private formBuilder: FormBuilder,
   private timeEntriesService: TimeEntriesService,
   public dialogRef: MatDialogRef<TimeEntriesComponent>,
   private projectService: ProjectService,
+  private taskService: TaskService,
   private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
     this.timeEntriesForm = this.formBuilder.group({
       name:[null,[Validators.required, Validators.pattern(GlobalConstants.nameRegex)]],
       projectId:[null,Validators.required],
-      comment:[null,Validators.required],
+      taskId:[null,Validators.required],
       date:[null, Validators.required],
       StartTime:[null, Validators.required],
       EndTime:[null, Validators.required]
@@ -44,11 +47,26 @@ export class TimeEntriesComponent implements OnInit {
     } 
 
     this.getProjects();
+    this.getTasks();
   }
 
   getProjects(){
     this.projectService.getProjects().subscribe((response:any) =>{
       this.projects = response;
+    },(error:any) =>{
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }
+      else{
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackbarService.openSnackBar(this.responseMessage,GlobalConstants.error);
+    })
+  }
+
+  getTasks(){
+    this.taskService.getTasks().subscribe((response:any) =>{
+      this.tasks = response;
     },(error:any) =>{
       if(error.error?.message){
         this.responseMessage = error.error?.message;
@@ -74,7 +92,7 @@ export class TimeEntriesComponent implements OnInit {
     var data = {
       name: formData.name,
       projectId: formData.projectId,
-      comment: formData.comment,
+      taskId: formData.taskId,
       date:formData.date,
       StartTime:formData.StartTime,
       EndTime:formData.EndTime
@@ -101,7 +119,7 @@ export class TimeEntriesComponent implements OnInit {
       id: this.dialogData.data.id,
       name: formData.name,
       projectId: formData.projectId,
-      comment: formData.comment,
+      taskId: formData.taskId,
       date:formData.date,
       StartTime:formData.StartTime,
       EndTime:formData.EndTime

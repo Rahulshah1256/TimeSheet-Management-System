@@ -16,33 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `employee`
+-- Table structure for table `project`
 --
 
-DROP TABLE IF EXISTS `employee`;
+DROP TABLE IF EXISTS `project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `employee` (
+CREATE TABLE `project` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(250) DEFAULT NULL,
-  `contactNumber` varchar(20) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `password` varchar(250) DEFAULT NULL,
-  `status` varchar(250) DEFAULT NULL,
-  `role` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `employee`
+-- Dumping data for table `project`
 --
 
-LOCK TABLES `employee` WRITE;
-/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Admin','9089765476','admin@gmail.com','admin123','true','admin'),(2,'ranvir','8978098756','ranvir@gmail.com','ranvir123','true','user'),(3,'vinay','6532658742','vinay@gmail.com','vinay@123','true','user'),(4,'punam','5632654785','punam@gmail.com','punam123','true','user'),(5,'asif','4532568452','asif@gmail.com','asif123','true','user'),(6,'bobby','4521257856','bobby@gmail.com','bobby123','true','user'),(7,'ravi','8978098756','ranvi@gmail.com','ranvi123','false','user'),(8,'ravi','8978098756','sohan@gmail.com','ranvi123','false','user'),(9,'kumar','8978098756','kumar@gmail.com',NULL,'false','user'),(10,'karan','4578098756','karan@gmail.com','ranvi123','false','user'),(11,'Navin','7865098756','navin@gmail.com','navin123','false','user');
-/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+LOCK TABLES `project` WRITE;
+/*!40000 ALTER TABLE `project` DISABLE KEYS */;
+INSERT INTO `project` VALUES (1,'hdfc bank'),(2,'Canara Bank'),(3,'School Management'),(4,'Shopping Project'),(5,'Parking Lot Management'),(6,'Library Management');
+/*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-10 12:20:54
+-- Dump completed on 2022-09-12 15:43:29

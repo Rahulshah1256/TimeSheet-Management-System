@@ -18,7 +18,7 @@ export class TaskService {
   }
 
   update(data:any){
-    return this.httpClient.post(this.url+
+    return this.httpClient.patch(this.url+
       "/task/update/",data,{
         headers: new HttpHeaders().set('Content-Type', "application/json")
       })

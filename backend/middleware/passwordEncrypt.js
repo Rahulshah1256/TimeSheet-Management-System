@@ -1,11 +1,15 @@
 
 const bcrypt = require('bcrypt');
+const utf8 = require('utf8');
+const sha256 = require('sha256');
 
 
- function passwordEncrypt(req, res, next)  {
-        var value = res.body.password;
-        const salt = bcrypt.genSalt(10);
-        value = bcrypt.hash(value, salt); 
-}
+ function encryptPassWord(password){
+   
+        const utf8EncodedPass = utf8.encode(password);
+        const hash = sha256(utf8EncodedPass, { asBytes: true });
+        return Buffer.from(hash).toString('base64');
+        
+    }
 
-module.exports = { passwordEncrypt: passwordEncrypt };
+    module.exports = { encryptPassWord: encryptPassWord }

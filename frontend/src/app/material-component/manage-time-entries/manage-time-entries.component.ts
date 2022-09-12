@@ -15,7 +15,7 @@ import { TimeEntriesComponent } from '../dialog/time-entries/time-entries.compon
   styleUrls: ['./manage-time-entries.component.scss']
 })
 export class ManageTimeEntriesComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'projectName', 'comment', 'date','StartTime','EndTime','edit'];
+  displayedColumns: string[] = ['name', 'projectName', 'taskName', 'date','StartTime','EndTime','edit'];
   dataSource:any;
   responseMessage: any;
 
