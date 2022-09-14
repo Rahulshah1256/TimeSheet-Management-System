@@ -23,7 +23,7 @@ create table task(
     name varchar(255) NOT NULL,
     projectId integer NOT NULL,
     startTime TIMESTAMP NOT NULL,
-    endTime TIMESTAMP NOT NULL
+    endTime TIMESTAMP NOT NULL,
     primary key(id)
 )
 
@@ -45,15 +45,3 @@ create table timeEntries(
 insert into timeEntries(name, projectId, comment, date, StartTime, EndTime)
 values('vinod', 1, 'nice project', '2022-05-12', '2022-02-09 07:00:00', '2022-02-10 08:10:00');
 
-create table bill(
-    id int NOT NULL AUTO_INCREMENT,
-    uuid varchar(200) NOT NULL,
-    name varchar(255) NOT NULL,
-    email varchar(255) NOT NULL,
-    contactNumber varchar(20) NOT NULL,
-    paymentMethod varchar(50) NOT NULL,
-    total int NOT NULL,
-    productDetails JSON DEFAULT NULL,
-    createdBy varchar(255) NOT NULL,
-    primary key(id)
-)

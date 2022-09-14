@@ -24,6 +24,13 @@ export class ProjectService {
       })
   }
 
+  delete(id:any){
+    return this.httpClient.delete(this.url+
+      "/project/delete/"+id,{
+        headers: new HttpHeaders().set('Content-Type', "application/json")
+      })
+  }
+
   getProjects(){
     return this.httpClient.get(this.url + "/project/get/");
   }

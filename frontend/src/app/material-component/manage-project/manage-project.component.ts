@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
+import { ConfirmationComponent } from '../dialog/confirmation/confirmation.component';
 import { ProjectComponent } from '../dialog/project/project.component';
 
 @Component({
@@ -78,6 +79,34 @@ export class ManageProjectComponent implements OnInit {
         this.tableData();
       }
     )
+  }
+
+  handleDeleteAction(values:any){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data ={
+      message: 'delete '+values.name+' project'
+    };
+    const dialogRef = this.dialog.open(ConfirmationComponent, dialogConfig);
+    const sub = dialogRef.componentInstance.onEmitStatusChange.subscribe((response:any) =>{
+      this.deleteProject(values.id);
+      dialogRef.close();
+    })
+  }
+  deleteProject(id:any){
+    this.projectService.delete(id).subscribe((response:any) =>{
+      this.tableData();
+      this.responseMessage = response?.message;
+      this.snackbarService.openSnackBar(this.responseMessage, "success");
+    }, (error:any) => {
+      console.log(error);
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }
+      else{
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
+    })
   }
 
 }

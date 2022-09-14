@@ -1,8 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const bcrypt = require('bcrypt');
 require("dotenv").config();
-const connection = require("./connection");
 const employeeRoute = require("./routes/employee");
 const projectRoute = require("./routes/project");
 const timeEntriesRoute = require("./routes/timeEntries");

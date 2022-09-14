@@ -11,8 +11,9 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   signup(data: any){
+    console.log("password")
     return this.httpClient.post(this.url+
-      "/employee/signup", data,{
+      `/employee/signup/`, data,{
         headers: new HttpHeaders().set('Content-Type', "application/json")
       })
   }
